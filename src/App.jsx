@@ -24,14 +24,23 @@ function Square({ value, onSquareClick }) {
 }
 
 export default function Board() {
+  // set first move to X
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   // slice copies the squares array -> nextSquares
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+    
     // re-renders components that use squares
     setSquares(nextSquares);
+    // flip value
+    setXIsNext(!xIsNext);
   }
 
   return (
