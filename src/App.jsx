@@ -28,8 +28,13 @@ export default function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
-  // slice copies the squares array -> nextSquares
   function handleClick(i) {
+    // if square is filled, return early
+    if (squares[i]) {
+      return;
+    }
+
+    // slice copies the squares array -> nextSquares
     const nextSquares = squares.slice();
     if (xIsNext) {
       nextSquares[i] = "X";
